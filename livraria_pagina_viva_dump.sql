@@ -1,36 +1,13 @@
-/*M!999999\- enable the sandbox mode */ 
--- MariaDB dump 10.19  Distrib 10.11.14-MariaDB, for debian-linux-gnu (x86_64)
---
--- Host: localhost    Database: livraria_pagina_viva
--- ------------------------------------------------------
--- Server version	10.11.14-MariaDB-0ubuntu0.24.04.1
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Current Database: `livraria_pagina_viva`
---
 
 CREATE DATABASE /*!32312 IF NOT EXISTS*/ `livraria_pagina_viva` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
 USE `livraria_pagina_viva`;
 
---
--- Table structure for table `autores`
---
+
 
 DROP TABLE IF EXISTS `autores`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `autores` (
   `id_autor` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
@@ -39,9 +16,7 @@ CREATE TABLE `autores` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `autores`
---
+
 
 LOCK TABLES `autores` WRITE;
 /*!40000 ALTER TABLE `autores` DISABLE KEYS */;
@@ -126,9 +101,6 @@ INSERT INTO `cliente_interesses` VALUES
 /*!40000 ALTER TABLE `cliente_interesses` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `cliente_telefones`
---
 
 DROP TABLE IF EXISTS `cliente_telefones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -143,10 +115,6 @@ CREATE TABLE `cliente_telefones` (
   CONSTRAINT `cliente_telefones_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `cliente_telefones`
---
 
 LOCK TABLES `cliente_telefones` WRITE;
 /*!40000 ALTER TABLE `cliente_telefones` DISABLE KEYS */;
@@ -163,9 +131,6 @@ INSERT INTO `cliente_telefones` VALUES
 /*!40000 ALTER TABLE `cliente_telefones` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `clientes`
---
 
 DROP TABLE IF EXISTS `clientes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -184,9 +149,6 @@ CREATE TABLE `clientes` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `clientes`
---
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
@@ -202,9 +164,6 @@ INSERT INTO `clientes` VALUES
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `editoras`
---
 
 DROP TABLE IF EXISTS `editoras`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -218,9 +177,6 @@ CREATE TABLE `editoras` (
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `editoras`
---
 
 LOCK TABLES `editoras` WRITE;
 /*!40000 ALTER TABLE `editoras` DISABLE KEYS */;
@@ -233,9 +189,7 @@ INSERT INTO `editoras` VALUES
 /*!40000 ALTER TABLE `editoras` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `itens_pedido`
---
+
 
 DROP TABLE IF EXISTS `itens_pedido`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -252,9 +206,7 @@ CREATE TABLE `itens_pedido` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `itens_pedido`
---
+
 
 LOCK TABLES `itens_pedido` WRITE;
 /*!40000 ALTER TABLE `itens_pedido` DISABLE KEYS */;
@@ -280,9 +232,7 @@ INSERT INTO `itens_pedido` VALUES
 /*!40000 ALTER TABLE `itens_pedido` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `livro_autor`
---
+
 
 DROP TABLE IF EXISTS `livro_autor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -297,9 +247,7 @@ CREATE TABLE `livro_autor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `livro_autor`
---
+
 
 LOCK TABLES `livro_autor` WRITE;
 /*!40000 ALTER TABLE `livro_autor` DISABLE KEYS */;
@@ -318,9 +266,6 @@ INSERT INTO `livro_autor` VALUES
 /*!40000 ALTER TABLE `livro_autor` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `livros`
---
 
 DROP TABLE IF EXISTS `livros`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -343,9 +288,7 @@ CREATE TABLE `livros` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `livros`
---
+
 
 LOCK TABLES `livros` WRITE;
 /*!40000 ALTER TABLE `livros` DISABLE KEYS */;
@@ -363,9 +306,7 @@ INSERT INTO `livros` VALUES
 /*!40000 ALTER TABLE `livros` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `notas_fiscais`
---
+
 
 DROP TABLE IF EXISTS `notas_fiscais`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -383,9 +324,7 @@ CREATE TABLE `notas_fiscais` (
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `notas_fiscais`
---
+
 
 LOCK TABLES `notas_fiscais` WRITE;
 /*!40000 ALTER TABLE `notas_fiscais` DISABLE KEYS */;
@@ -401,9 +340,6 @@ INSERT INTO `notas_fiscais` VALUES
 /*!40000 ALTER TABLE `notas_fiscais` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `pedidos`
---
 
 DROP TABLE IF EXISTS `pedidos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -420,9 +356,7 @@ CREATE TABLE `pedidos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `pedidos`
---
+
 
 LOCK TABLES `pedidos` WRITE;
 /*!40000 ALTER TABLE `pedidos` DISABLE KEYS */;
@@ -440,9 +374,6 @@ INSERT INTO `pedidos` VALUES
 /*!40000 ALTER TABLE `pedidos` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Dumping routines for database 'livraria_pagina_viva'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
