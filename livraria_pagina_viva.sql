@@ -1,18 +1,7 @@
--- =====================================================================
--- Atividade III - SEDUC DEST2
--- Banco de dados: livraria_pagina_viva (Livraria online "Página Viva")
--- SGBD: MySQL 8 / MariaDB 10.x
--- =====================================================================
-
-DROP DATABASE IF EXISTS livraria_pagina_viva;
-CREATE DATABASE livraria_pagina_viva
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE livraria_pagina_viva;
 USE livraria_pagina_viva;
 
--- ---------------------------------------------------------------------
--- ESTRUTURA (DDL)
--- ---------------------------------------------------------------------
+
 
 CREATE TABLE categorias (
   id_categoria INT AUTO_INCREMENT PRIMARY KEY,
@@ -24,13 +13,13 @@ CREATE TABLE editoras (
   nome       VARCHAR(100) NOT NULL,
   cidade     VARCHAR(60)  NOT NULL,
   uf         CHAR(2)      NOT NULL
-) ENGINE=InnoDB;
+);
 
 CREATE TABLE autores (
   id_autor      INT AUTO_INCREMENT PRIMARY KEY,
   nome          VARCHAR(100) NOT NULL,
   nacionalidade VARCHAR(50)  NOT NULL
-) ENGINE=InnoDB;
+) ;
 
 CREATE TABLE livros (
   id_livro        INT AUTO_INCREMENT PRIMARY KEY,
@@ -43,9 +32,9 @@ CREATE TABLE livros (
   id_categoria    INT NOT NULL,
   FOREIGN KEY (id_editora)   REFERENCES editoras(id_editora),
   FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria)
-) ENGINE=InnoDB;
+) ;
 
--- Relacionamento N:N entre livros e autores
+
 CREATE TABLE livro_autor (
   id_livro INT NOT NULL,
   id_autor INT NOT NULL,
@@ -64,23 +53,23 @@ CREATE TABLE clientes (
   data_cadastro  DATE         NOT NULL
 ) ENGINE=InnoDB;
 
--- Atributo multivalorado: telefones (4FN)
+
 CREATE TABLE cliente_telefones (
   id_telefone INT AUTO_INCREMENT PRIMARY KEY,
   id_cliente  INT NOT NULL,
   numero      VARCHAR(15) NOT NULL,
   tipo        ENUM('celular','residencial','comercial') NOT NULL,
   FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
-) ENGINE=InnoDB;
+) ;
 
--- Atributo multivalorado independente: categorias de interesse (4FN)
+
 CREATE TABLE cliente_interesses (
   id_cliente   INT NOT NULL,
   id_categoria INT NOT NULL,
   PRIMARY KEY (id_cliente, id_categoria),
   FOREIGN KEY (id_cliente)   REFERENCES clientes(id_cliente),
   FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria)
-) ENGINE=InnoDB;
+) ;
 
 CREATE TABLE pedidos (
   id_pedido        INT AUTO_INCREMENT PRIMARY KEY,
@@ -89,9 +78,9 @@ CREATE TABLE pedidos (
   status           ENUM('Pendente','Pago','Enviado','Entregue','Cancelado') NOT NULL DEFAULT 'Pendente',
   forma_pagamento  ENUM('Pix','Cartão de crédito','Boleto') NOT NULL,
   FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
-) ENGINE=InnoDB;
+) ;
 
--- Relacionamento N:N entre pedidos e livros (com atributos próprios)
+
 CREATE TABLE itens_pedido (
   id_pedido       INT NOT NULL,
   id_livro        INT NOT NULL,
@@ -100,7 +89,7 @@ CREATE TABLE itens_pedido (
   PRIMARY KEY (id_pedido, id_livro),
   FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido),
   FOREIGN KEY (id_livro)  REFERENCES livros(id_livro)
-) ENGINE=InnoDB;
+);
 
 -- Relacionamento 1:1 com pedidos
 CREATE TABLE notas_fiscais (
@@ -110,11 +99,9 @@ CREATE TABLE notas_fiscais (
   data_emissao  DATE          NOT NULL,
   valor_total   DECIMAL(10,2) NOT NULL,
   FOREIGN KEY (id_pedido) REFERENCES pedidos(id_pedido)
-) ENGINE=InnoDB;
+);
 
--- ---------------------------------------------------------------------
--- DADOS (DML) - todos fictícios
--- ---------------------------------------------------------------------
+
 
 INSERT INTO categorias (nome) VALUES
 ('Romance'), ('Poesia'), ('Teatro'), ('Infantil'), ('Tecnologia'), ('Didático');
@@ -209,14 +196,3 @@ INSERT INTO itens_pedido (id_pedido, id_livro, quantidade, preco_unitario) VALUE
 (9, 3, 1, 49.90),
 (10, 5, 1, 34.90),
 (10, 8, 1, 36.50);
-
--- Notas fiscais para pedidos faturados (não cancelados/pendentes); valor = soma dos itens
-INSERT INTO notas_fiscais (id_pedido, numero, data_emissao, valor_total)
-SELECT p.id_pedido,
-       CONCAT('NF', LPAD(p.id_pedido, 6, '0')),
-       p.data_pedido,
-       SUM(i.quantidade * i.preco_unitario)
-FROM pedidos p
-JOIN itens_pedido i ON i.id_pedido = p.id_pedido
-WHERE p.status IN ('Pago','Enviado','Entregue')
-GROUP BY p.id_pedido, p.data_pedido;
